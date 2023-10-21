@@ -7,10 +7,59 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btn_connect" Content="Button" HorizontalAlignment="Left" Margin="80,49,0,0" VerticalAlignment="Top" Click="btn_connect_Click"/>
-        <Label x:Name="lbl_chanel" Content="Nom de la chaîne:" HorizontalAlignment="Left" Margin="139,46,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_chanel" HorizontalAlignment="Left" Margin="260,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="lbl_token" Content="Jeton D'accès:" HorizontalAlignment="Left" Margin="400,46,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_token" HorizontalAlignment="Left" Margin="500,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Name="g_tools">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            
+            <Button x:Name="btn_connect" Content="Button" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Click="btn_connect_Click" Grid.Column="0" Grid.Row="0"/>
+            <Label x:Name="lbl_chanel" Content="Nom de la chaîne:" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0"/>
+            <TextBox x:Name="txt_chanel" HorizontalAlignment="Left" Margin="115,15,10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="0" Height="17.96"/>
+            <Label x:Name="lbl_token" Content="Jeton D'accès:" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0"/>
+            <TextBox x:Name="txt_token" HorizontalAlignment="Left" Margin="95,15,10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="0" Height="17.96"/>
+        </Grid>
+        
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label x:Name="lbl_wait_user" Content="Utilisateur en attente" Margin="10,10,10,10" Grid.Row="0" Grid.Column="0"></Label>
+            <ListView Grid.Row="1" Grid.Column="0">
+                
+            </ListView>
+
+            <Label x:Name="lbl_player" Content="Joueur" Margin="10,10,10,10" Grid.Row="2" Grid.Column="0"></Label>
+            <ListView Grid.Row="3" Grid.Column="0">
+
+            </ListView>
+
+            <ListView Grid.Row="0" Grid.RowSpan="4" Grid.Column="1">
+                
+            </ListView>
+        </Grid>
     </Grid>
 </Window>
