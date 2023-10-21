@@ -10,7 +10,7 @@ namespace MathwolphDndBot
 {
     internal class Bot
     {
-        ConnectionCredentials creds = new ConnectionCredentials(TwitchInfo.ChannelName, TwitchInfo.BotToken);
+        ConnectionCredentials creds;
         TwitchClient client;
 
         public List<User> Players { get; internal set; }
@@ -26,9 +26,13 @@ namespace MathwolphDndBot
             IsConnected = false;
         }
 
-
         internal void Connect(bool isLogging)
         {
+            if(creds is null)
+            {
+                creds = new ConnectionCredentials(TwitchInfo.ChannelName, TwitchInfo.BotToken);
+            }
+
             client = new TwitchClient();
             client.Initialize(creds, TwitchInfo.ChannelName);
 

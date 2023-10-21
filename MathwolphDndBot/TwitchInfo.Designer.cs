@@ -61,7 +61,7 @@ namespace MathwolphDndBot {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à ow549v86ehgwd668dnama7uvl3q29p.
+        ///   Recherche une chaîne localisée semblable à .
         /// </summary>
         internal static string BotToken {
             get {
@@ -70,7 +70,7 @@ namespace MathwolphDndBot {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à mathwolph.
+        ///   Recherche une chaîne localisée semblable à .
         /// </summary>
         internal static string ChannelName {
             get {
