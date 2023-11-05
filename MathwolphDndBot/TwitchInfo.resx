@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BotToken" xml:space="preserve">
-    <value></value>
+    <value>d47vxj1iafhre8yk271j3dwnieorvf</value>
     <comment>Google Twich token generator : https://twitchtokengenerator.com/</comment>
   </data>
   <data name="ChannelName" xml:space="preserve">
-    <value></value>
+    <value>mathwolph</value>
     <comment>Name of the chanel to read</comment>
   </data>
 </root>

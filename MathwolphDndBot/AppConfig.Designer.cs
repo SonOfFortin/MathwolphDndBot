@@ -22,14 +22,14 @@ namespace MathwolphDndBot {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class TwitchInfo {
+    internal class AppConfig {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TwitchInfo() {
+        internal AppConfig() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MathwolphDndBot {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MathwolphDndBot.TwitchInfo", typeof(TwitchInfo).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MathwolphDndBot.AppConfig", typeof(AppConfig).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,24 +57,6 @@ namespace MathwolphDndBot {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à d47vxj1iafhre8yk271j3dwnieorvf.
-        /// </summary>
-        internal static string BotToken {
-            get {
-                return ResourceManager.GetString("BotToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à mathwolph.
-        /// </summary>
-        internal static string ChannelName {
-            get {
-                return ResourceManager.GetString("ChannelName", resourceCulture);
             }
         }
     }
