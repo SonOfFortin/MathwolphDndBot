@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathwolphDndBot.Class
+namespace MathwolphDndBot.MVVM.Model
 {
     [Flags]
     public enum Access : ushort

@@ -11,6 +11,7 @@
                 <!-- Themes -->
                 <ResourceDictionary Source="/Themes/ConnectButton.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/ConsoleListTheme.Nord.xaml"/>
+                <ResourceDictionary Source="/Themes/FormControl.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/MenuButton.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/ServerListTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/TitleBarButton.Nord.xaml"/>
@@ -18,8 +19,8 @@
 
             <!--<FontFamily x:Key="FontAwesome">/MathwolphDndBot;component/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid</FontFamily>-->
 
-            <DataTemplate DataType="{x:Type vms:ProtectionViewModel}">
-                <view:ProtectionView />
+            <DataTemplate DataType="{x:Type vms:ConnexionViewModel}">
+                <view:ConnexionView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vms:SettingsViewModel}">
@@ -29,6 +30,14 @@
             <DataTemplate DataType="{x:Type vms:ConsoleViewModel}">
                 <view:ConsoleView />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:MessageViewModel}">
+                <view:MessageView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:UserViewModel}">
+                <view:UserView />
+            </DataTemplate> 
         </ResourceDictionary>
     </Application.Resources>
 </Application>

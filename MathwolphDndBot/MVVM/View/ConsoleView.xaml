@@ -10,8 +10,11 @@
         <ListView 
             VerticalAlignment="Bottom"
             Background="Transparent"
-            ItemsSource="{Binding Global.Terminals}"
-            Style="{StaticResource ListConsole}">
+            ItemsSource="{Binding Global.Bots.Terminals}"
+            
+            Style="{StaticResource ListConsole}" ScrollViewer.CanContentScroll="True" 
+            ScrollViewer.VerticalScrollBarVisibility="Visible" 
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             
             <!--<ListView.ItemTemplate>
                 <StackPanel Margin="4,0,0,0">

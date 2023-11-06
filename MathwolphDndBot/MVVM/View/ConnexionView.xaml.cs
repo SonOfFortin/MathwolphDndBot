@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MathwolphDndBot.MVVM.View
 {
     /// <summary>
-    /// Logique d'interaction pour ProtectionView.xaml
+    /// Logique d'interaction pour ConnexionView.xaml
     /// </summary>
-    public partial class ProtectionView : UserControl
+    public partial class ConnexionView : UserControl
     {
-        public ProtectionView()
+        public ConnexionView()
         {
             InitializeComponent();
         }

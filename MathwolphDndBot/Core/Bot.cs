@@ -7,50 +7,66 @@ using TwitchLib.Communication.Events;
 using System.Diagnostics;
 using System;
 using MathwolphDndBot.MVVM.Model;
+using MathwolphDndBot.Properties;
 
-namespace MathwolphDndBot.Class
+namespace MathwolphDndBot.Core
 {
-    internal class Bot
+    internal class Bot : ObservableObject
     {
-        ConnectionCredentials? creds;
-        TwitchClient client = new TwitchClient();
+        private ConnectionCredentials? creds;
+        private TwitchClient client = new TwitchClient();
 
-        bool sendClose = false;
-
-        const int _maxElemTerminal = 200;
+        private bool sendClose = false;
+        private const int _maxElemTerminal = 200;
+        private string _strConnexionStatus = string.Empty;
+        private bool _isConnected = false;
 
         public ObservableCollection<User> Players { get; internal set; }
-        public ObservableCollection<string> RequestPlayers {  get; internal set; }
-        public ObservableCollection<Terminal> Terminals {  get;  set; }
-        public bool IsConnected { get; internal set ; }
+        public ObservableCollection<string> RequestPlayers { get; internal set; }
+        public ObservableCollection<Terminal> Terminals { get; set; }
 
-        public Bot() 
+        public bool IsConnected {
+            get {  return _isConnected; }
+            internal set {  
+                _isConnected = value;
+
+                OnPropertyChanged();
+            } 
+        }
+        public string StrConnexionStatus {
+            get { return _strConnexionStatus; }
+            internal set { 
+                _strConnexionStatus = value;
+
+                OnPropertyChanged();
+            } 
+        }
+
+        public Bot()
         {
-            IsConnected = false;
             Players = new ObservableCollection<User>();
             RequestPlayers = new ObservableCollection<string>();
             Terminals = new ObservableCollection<Terminal>();
-
-            //Players.Add(new User() { Name = "Cannibal20"});
         }
 
-        internal void Connect(bool isLogging)
+        internal void Connect()
         {
-            if(creds is null)
+            if (creds is null)
             {
-                creds = new ConnectionCredentials(TwitchInfo.ChannelName, TwitchInfo.BotToken);
+                creds = new ConnectionCredentials(Settings.Default.ChannelName, Settings.Default.BotToken);
             }
 
-            client.Initialize(creds, TwitchInfo.ChannelName);
+            client.Initialize(creds, Settings.Default.ChannelName);
+
+            StrConnexionStatus = "Connecting...";
 
             AddTerminal("[Bot]: Connecting...");
 
-            if (isLogging)
-                client.OnLog += Client_OnLog;
-
+            client.OnLog += Client_OnLog;
             client.OnError += Client_OnError;
             client.OnMessageReceived += Client_OnMessageReceived;
             client.OnChatCommandReceived += Client_OnChatCommandReceived;
+            client.OnDisconnected += Client_OnDisconnected;
 
             client.Connect();
             client.OnConnected += Client_OnConnected;
@@ -62,6 +78,8 @@ namespace MathwolphDndBot.Class
             //If pour bypasser ce problème rapidement
             if (!sendClose)
             {
+                StrConnexionStatus = "Connected";
+
                 AddTerminal("[Bot]: Connected", TerminalType.Succes);
 
                 Players.Clear();
@@ -73,48 +91,60 @@ namespace MathwolphDndBot.Class
             sendClose = false;
         }
 
+        private void Client_OnDisconnected(object? sender, OnDisconnectedEventArgs e)
+        {
+            StrConnexionStatus = "Disconnected";
+
+            AddTerminal("[Bot]: Disconnected", TerminalType.Succes);
+
+            IsConnected = false;
+        }
+
         private void Client_OnChatCommandReceived(object? sender, OnChatCommandReceivedArgs e)
         {
             //Liste des commande pour tout le monde
-            switch(e.Command.CommandText.ToLower())
+            switch (e.Command.CommandText.ToLower())
             {
                 /*case "dice":
-                    client.SendMessage(TwitchInfo.ChannelName, "Ain't got no dice");
+                    client.SendMessage(Settings.Default.ChannelName, "Ain't got no dice");
                     break;*/
                 case "join":
-                    client.SendMessage(TwitchInfo.ChannelName, "Arrête de le dire et roule le estie qu'on le fume");
+                    client.SendMessage(Settings.Default.ChannelName, "Arrête de le dire et roule le estie qu'on le fume");
 
                     break;
                 case "sexavecmath":
-                    client.SendMessage(TwitchInfo.ChannelName, "Math n'est pas ouvert à cette proposition la, il a des morpions. Mais spiky ouiii");
+                    client.SendMessage(Settings.Default.ChannelName, "Math n'est pas ouvert à cette proposition la, il a des morpions. Mais spiky ouiii");
                     break;
 
                 case "sexaveccannibal":
-                    client.SendMessage(TwitchInfo.ChannelName, "Ahh, fresh meat!");
+                    client.SendMessage(Settings.Default.ChannelName, "Ahh, fresh meat!");
                     break;
 
                 case "joint":
-                    if(RequestPlayers.Any(str => str.Contains(e.Command.ChatMessage.DisplayName)))
+                    if (RequestPlayers.Any(str => str.Contains(e.Command.ChatMessage.DisplayName)))
                     {
-                        client.SendMessage(TwitchInfo.ChannelName, "Est le cave tu est déjà en attente d'approbation");
+                        client.SendMessage(Settings.Default.ChannelName, "Est le cave tu est déjà en attente d'approbation");
 
                         break;
-                    } 
-                    
-                    RequestPlayers.Add(e.Command.ChatMessage.DisplayName);
+                    }
 
-                    client.SendMessage(TwitchInfo.ChannelName, "Votre demande a été envoyé");
+                    App.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        RequestPlayers.Add(e.Command.ChatMessage.DisplayName);
+                    });
+
+                    client.SendMessage(Settings.Default.ChannelName, "Votre demande a été envoyé");
 
                     break;
             }
 
             //Liste des commande de l'Administrateur
-            if(e.Command.ChatMessage.DisplayName.ToLower() == TwitchInfo.ChannelName.ToLower())
+            if (e.Command.ChatMessage.DisplayName.ToLower() == Settings.Default.ChannelName.ToLower())
             {
                 switch (e.Command.CommandText.ToLower())
                 {
                     case "hi":
-                        client.SendMessage(TwitchInfo.ChannelName, "Hi Boss but cannibal20 is your god");
+                        client.SendMessage(Settings.Default.ChannelName, "Hi Boss but cannibal20 is your god");
                         break;
                 }
             }
@@ -127,7 +157,6 @@ namespace MathwolphDndBot.Class
 
         private void Client_OnError(object? sender, OnErrorEventArgs e)
         {
-            //throw new NotImplementedException();
             AddTerminal($"[Bot Error]: {e.Exception.Message}", TerminalType.Error);
         }
 
@@ -140,42 +169,34 @@ namespace MathwolphDndBot.Class
         {
             Trace.WriteLine(msg);
 
-            //if (Terminals.Count == _maxElemTerminal)
-            //    Terminals.Remove(Terminals.First());
+            if (Terminals.Count == _maxElemTerminal)
+            {
+                App.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    Terminals.Remove(Terminals.First());
+                });
+            } 
 
-            //Terminals.Add(new Terminal(msg, type));
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                Terminals.Add(new Terminal()
+                {
+                    Message = msg,
+                    Moment = DateTime.Now,
+                    Type = type
+                });
+            });
         }
 
         internal void Disconnect()
         {
             AddTerminal("[Bot]: Disconnecting ang closing application", TerminalType.Succes);
 
-            IsConnected = false;
+            StrConnexionStatus = "Disconnecting";
+
             sendClose = true;
 
             client.Disconnect();
-        }
-
-        public void AddPlayer(string name)
-        {
-            RemoveRequestPlayers(name);
-
-            Players.Add(new User() { 
-                Name = name,
-                Access = Access.Player
-            });
-        }
-
-        public void RemoveRequestPlayers(string name)
-        {
-            RequestPlayers.Remove(name);
-        }
-
-        public void test() 
-        {
-            var strName = "Cann" + new Random().Next(0, 99);
-
-            RequestPlayers.Add(strName);
         }
     }
 }

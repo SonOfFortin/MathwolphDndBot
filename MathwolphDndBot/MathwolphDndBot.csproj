@@ -75,10 +75,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppConfig.resx</DependentUpon>
     </Compile>
-    <Compile Update="TwitchInfo.Designer.cs">
-      <DesignTime>True</DesignTime>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>TwitchInfo.resx</DependentUpon>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -87,10 +87,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppConfig.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="TwitchInfo.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TwitchInfo.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

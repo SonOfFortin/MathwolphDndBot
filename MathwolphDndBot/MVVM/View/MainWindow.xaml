@@ -15,7 +15,7 @@
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
-    
+
     <DockPanel Background="#1e1e1e" 
                Margin="7">
         <Border Height="28" 
@@ -25,7 +25,7 @@
                 <MouseBinding MouseAction="LeftClick"
                               Command="{Binding MoveWindowCommand}"/>
             </Border.InputBindings>
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -38,7 +38,7 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Margin="100,0,0,0"/>
-                
+
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal"
                             HorizontalAlignment="Right"
@@ -67,7 +67,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
-                                                         To="120"
+                                                         To="150"
                                                          Duration="0:0:.1"/>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -89,162 +89,59 @@
             </Border.Style>
 
             <StackPanel>
-                <RadioButton Content="VPN"
-                             extensions:Extensions.Icon="&#128737;"
+                <RadioButton Content="Connexion"
+                             extensions:Extensions.Icon="&#xf0e7;"
                              Padding="7.6,3.5,8,0"
-                             FontSize="16"
-                             FontWeight="Normal"
-                             Foreground="LightGray"
                              IsChecked="True"
-                             Command="{Binding ShowProtectionView}" 
-                             Margin="6, 7"/>
+                             Command="{Binding ShowConnexionView}" 
+                             Margin="7"/>
 
                 <RadioButton Content="Utilisateur"
                              extensions:Extensions.Icon="&#xf234;"
-                             FontSize="16"
-                             FontWeight="Normal"
-                             Foreground="LightGray"
-                             Command=""
-                             Margin="6"/>
+                             Command="{Binding ShowUserView}"
+                             IsEnabled="{Binding Global.Bots.IsConnected}"/>
 
                 <RadioButton Content="Message"
                              extensions:Extensions.Icon="&#xf4ad;"
-                             FontSize="16"
-                             FontWeight="Normal"
-                             Foreground="LightGray"
-                             Command=""
-                             Margin="6"/>
+                             Command="{Binding ShowMessageView}"
+                             IsEnabled="{Binding Global.Bots.IsConnected}"/>
 
                 <RadioButton Content="Console"
                              extensions:Extensions.Icon="&#xf120;"
-                             FontSize="16"
-                             FontWeight="Normal"
-                             Foreground="LightGray"
                              Command="{Binding ShowConsoleView}"
-                             Margin="6"/>
+                             IsEnabled="{Binding Global.Bots.IsConnected}"/>
 
                 <RadioButton Content="Settings"
                              extensions:Extensions.Icon="&#xf013;"
-                             FontSize="16"
-                             FontWeight="Normal"
-                             Foreground="LightGray"
-                             Command="{Binding ShowSettingsView}"
-                             Margin="6"/>
+                             Command="{Binding ShowSettingsView}"/>
             </StackPanel>
         </Border>
 
         <ContentPresenter Content="{Binding CurrentView}"/>
 
-        <!--<Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="75px" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Name="g_tools">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <Button x:Name="btn_connect" Content="Button" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Click="btn_connect_Click" Grid.Column="0" Grid.Row="0"/>
-                <Label x:Name="lbl_chanel" Content="Nom de la chaîne:" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0"/>
-                <TextBox x:Name="txt_chanel" HorizontalAlignment="Left" Margin="115,15,10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="0" Height="17.96"/>
-                <Label x:Name="lbl_token" Content="Jeton D'accès:" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0"/>
-                <TextBox x:Name="txt_token" HorizontalAlignment="Left" Margin="95,15,10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="0" Height="17.96"/>
-                <Button x:Name="button1" Grid.Column="2" Content="Ajouter demande" HorizontalAlignment="Left" Margin="335,23,0,0" VerticalAlignment="Top" Click="button1_Click" />
-                <Button Grid.Column="2" Content="test" HorizontalAlignment="Left" Margin="335,3,0,0" VerticalAlignment="Top"  />
-            </Grid>
-
-            --><!--<ScrollViewer Grid.Row="1" Grid.Column="0" BorderThickness="0" Margin="0">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Margin="10 0" Orientation="Vertical" >
-                        <ItemsControl x:Name="lv_debug">
-                            <Border Width="auto" Margin="0" BorderThickness="0" CornerRadius="0" BorderBrush="Black">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="23">
-                                    <fa:SvgAwesome Icon="None" VerticalAlignment="Center" HorizontalAlignment="Center" Width="14" Height="14" Margin="5 0 0 0" PrimaryColor="red" />
-                                    <TextBlock Width="110" FontWeight="Bold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Height="15" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                2023-10-31 99:99
-                                    </TextBlock>
-                                    <TextBlock Width="67" FontWeight="Bold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Height="15" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                " - Test blabla"
-                                    </TextBlock>
-                                </StackPanel>
-                            </Border>
-                            <Border Width="auto" Margin="0" BorderThickness="0" CornerRadius="0" BorderBrush="Black">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="23">
-                                    <fa:SvgAwesome Icon="Solid_CircleXmark" VerticalAlignment="Center" HorizontalAlignment="Center" Width="14" Height="14" Margin="5 0 0 0" PrimaryColor="red" />
-                                    <Label Content="2023-10-31 99:99" Width="110" FontWeight="Bold" />
-                                    <Label Content="-" Width="12" FontWeight="Bold"/>
-                                    <Label Content="Test blabla" Width="247" FontWeight="Bold" />
-                                </StackPanel>
-                            </Border>
-                            <Border Width="auto" Margin="0" BorderThickness="0" CornerRadius="0" BorderBrush="Black">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="23">
-                                    <fa:SvgAwesome Icon="Solid_CircleXmark" VerticalAlignment="Center" HorizontalAlignment="Center" Width="14" Height="14" Margin="5 0 0 0" PrimaryColor="red" />
-                                    <Label Content="2023-10-31 99:99" Width="110" FontWeight="Bold" />
-                                    <Label Content="-" Width="12" FontWeight="Bold"/>
-                                    <Label Content="Test blabla" Width="247" FontWeight="Bold" />
-                                </StackPanel>
-                            </Border>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-
-                                </DataTemplate>
-
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </StackPanel>
-                </StackPanel>
-            </ScrollViewer>--><!--
-
-            <ListView Background="#252525"
-                      Grid.Row="1" Grid.Column="0"
-                      ScrollViewer.CanContentScroll="False"
-                      ItemsSource="{Binding TerminalList}"
-                      x:Name="lv_terminal">
-                
-            </ListView>
-
-            --><!--<ScrollViewer Grid.Row="1">
-        <StackPanel>
-
-        </StackPanel>
-    </ScrollViewer>--><!--
-
-
-
+        <!--                   
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="400"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    --><!--<RowDefinition Height="auto" />--><!--
+                    -->
+        <!--<RowDefinition Height="auto" />-->
+        <!--
                     <RowDefinition Height="*" />
-                    --><!--<RowDefinition Height="auto" />--><!--
+                    -->
+        <!--<RowDefinition Height="auto" />-->
+        <!--
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                --><!--<Label x:Name="lbl_wait_user" Content="Utilisateur en attente" Margin="10,10,10,10" Grid.Row="0" Grid.Column="0"></Label>-->
-                <!--<ListView Grid.Row="1" Grid.Column="0" BorderThickness="0" Margin="10,10,10,10">
+                -->
+        <!--<Label x:Name="lbl_wait_user" Content="Utilisateur en attente" Margin="10,10,10,10" Grid.Row="0" Grid.Column="0"></Label>-->
+        <!--<ListView Grid.Row="1" Grid.Column="0" BorderThickness="0" Margin="10,10,10,10">
             
-        </ListView>--><!--
+        </ListView>-->
+        <!--
 
                 <ScrollViewer Grid.Row="0" Grid.Column="0" BorderThickness="0" Margin="0">
                     <StackPanel>
@@ -273,10 +170,10 @@
                     </StackPanel>
                 </ScrollViewer>
 
-                --><!--<Label x:Name="lbl_player" Content="Joueur" Margin="10,10,10,10" Grid.Row="2" Grid.Column="0"></Label>
+                <Label x:Name="lbl_player" Content="Joueur" Margin="10,10,10,10" Grid.Row="2" Grid.Column="0"></Label>
         <ListView Grid.Row="3" Grid.Column="0" BorderThickness="0" Margin="10,10,10,10">
 
-        </ListView>--><!--
+        </ListView>
 
                 <ScrollViewer Grid.Row="1" Grid.Column="0" BorderThickness="0" Margin="0">
                     <StackPanel>
@@ -293,5 +190,4 @@
             </Grid>
         </Grid>-->
     </DockPanel>
-    
 </Window>

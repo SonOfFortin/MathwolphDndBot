@@ -6,6 +6,7 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Content" Value="Connexion"/>
         
         <Setter Property="Template">
             <Setter.Value>
@@ -21,6 +22,10 @@
         </Setter>
 
         <Style.Triggers>
+            <DataTrigger Binding="{Binding Global.Bots.IsConnected}" Value="True">
+                <Setter Property="Content" Value="Déconnexion"/>
+            </DataTrigger>
+            
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="Gray"/>
             </Trigger>
