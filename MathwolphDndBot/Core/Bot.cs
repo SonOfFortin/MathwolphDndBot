@@ -22,7 +22,7 @@ namespace MathwolphDndBot.Core
         private bool _isConnected = false;
 
         public ObservableCollection<User> Players { get; internal set; }
-        public ObservableCollection<string> RequestPlayers { get; internal set; }
+        public ObservableCollection<string> RequestPlayers { get; set; }
         public ObservableCollection<Terminal> Terminals { get; set; }
 
         public bool IsConnected {
@@ -86,9 +86,21 @@ namespace MathwolphDndBot.Core
                 RequestPlayers.Clear();
 
                 IsConnected = true;
+
+                addTestUser();
             }
 
             sendClose = false;
+        }
+
+        public void addTestUser()
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                RequestPlayers.Add("Cannibal20");
+                RequestPlayers.Add("Cannibal21");
+                RequestPlayers.Add("Cannibal22");
+            });
         }
 
         private void Client_OnDisconnected(object? sender, OnDisconnectedEventArgs e)

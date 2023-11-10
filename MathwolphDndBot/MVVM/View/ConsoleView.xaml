@@ -12,7 +12,8 @@
             Background="Transparent"
             ItemsSource="{Binding Global.Bots.Terminals}"
             
-            Style="{StaticResource ListConsole}" ScrollViewer.CanContentScroll="True" 
+            Style="{StaticResource ListConsole}" 
+            ScrollViewer.CanContentScroll="True" 
             ScrollViewer.VerticalScrollBarVisibility="Visible" 
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             

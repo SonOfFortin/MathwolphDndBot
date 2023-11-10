@@ -45,13 +45,16 @@
                             Margin="0, 0, 4, 0">
                     <Button Content="-"
                             Command="{Binding MinimizeWindowCommand}"
-                            Padding="0,0,0,2"/>
+                            Padding="0,0,0,2"
+                            Style="{StaticResource TitleButton}"/>
                     <Button Content="□"
                             Command="{Binding MaximizeWindowCommand}"
-                            Padding="0,0,0,3"/>
+                            Padding="0,0,0,3"
+                            Style="{StaticResource TitleButton}"/>
                     <Button Content="x"
                             Command="{Binding ShutdownWindowCommand}"
-                            Padding="0,0,0,2"/>
+                            Padding="0,0,0,2"
+                            Style="{StaticResource TitleButton}"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -99,7 +102,8 @@
                 <RadioButton Content="Utilisateur"
                              extensions:Extensions.Icon="&#xf234;"
                              Command="{Binding ShowUserView}"
-                             IsEnabled="{Binding Global.Bots.IsConnected}"/>
+                             IsEnabled="{Binding Global.Bots.IsConnected}"
+                             Visibility="Collapsed"/>
 
                 <RadioButton Content="Message"
                              extensions:Extensions.Icon="&#xf4ad;"
@@ -147,25 +151,7 @@
                     <StackPanel>
                         <Label x:Name="lbl_wait_user" Content="Utilisateur en attente" Margin="10" Foreground="White"></Label>
                         <StackPanel Margin="5 0">
-                            <ItemsControl x:Name="lv_wait_user" ItemsSource="{Binding bot.RequestPlayers}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Width="345" Height="50" Margin="5 10" BorderThickness="1" CornerRadius="5" BorderBrush="Gray">
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                <Label Content="&#xf007;" FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
-                                                <Label Content="{Binding}" Width="247" HorizontalAlignment="Center" Height="40" VerticalContentAlignment="Center" Foreground="White" />
-                                                <Button Content="&#xf058;" FontFamily="{StaticResource FontAwesome}" BorderThickness="0" Background="Transparent" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Green" Margin="5" Click="Button_Click_add_player"/>
-                                                <Button Content="&#xf057;" FontFamily="{StaticResource FontAwesome}" BorderThickness="0" Background="Transparent" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Margin="0,5,0,5" Click="Button_Click_del_player"/>
-                                            </StackPanel>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
+                            
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

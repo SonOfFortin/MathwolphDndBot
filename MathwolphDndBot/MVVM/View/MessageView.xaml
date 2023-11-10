@@ -3,14 +3,138 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MathwolphDndBot.MVVM.View"
+             xmlns:local="clr-namespace:MathwolphDndBot" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Center">
-        <TextBlock Text="Message View"
-       FontSize="28"
-       VerticalAlignment="Center"
-       HorizontalAlignment="Center"
-       Foreground="LightGray"/>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#252525" 
+                Margin="10, 10, 5, 10"
+                BorderThickness="0"
+                CornerRadius="5">
+            <ScrollViewer BorderThickness="0" Margin="15, 15, 8, 15">
+                <StackPanel Margin="0,0,8,0">
+                    <Expander Header="{Binding NbrWaitUsers}">
+                        <ListView Style="{StaticResource listWaitUsers}"
+                                  ItemsSource="{Binding Global.Bots.RequestPlayers}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="225"/>
+                                            <ColumnDefinition Width="35"/>
+                                            <ColumnDefinition Width="35"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Column="0"
+                                                   Style="{StaticResource listWaitUsersImg}"/>
+
+                                        <Border Grid.Column="1" BorderThickness="0" Height="40" Padding="5, 0">
+                                            <TextBlock Text="{Binding}"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="LightGray"
+                                                       TextWrapping="Wrap"/>
+                                        </Border>
+
+                                        <Button Grid.Column="2"
+                                                x:Name="addUserButton"
+                                                Style="{StaticResource listWaitUsersBtn}" 
+                                                Content="&#xf058;"
+                                                Foreground="Green"
+                                                Command="{Binding AddUsersCommand}"
+                                                CommandParameter="{Binding}"/>
+
+                                        <Button Grid.Column="3" 
+                                                x:Name="deleteUserButton"
+                                                Style="{StaticResource listWaitUsersBtn}" 
+                                                Content="&#xf057;"
+                                                Foreground="Red"/>
+
+                                        <Grid.Style>
+                                            <Style TargetType="{x:Type Grid}">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="HorizontalAlignment" Value="Left"/>
+
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#444444"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Expander>
+
+                    <Expander Margin="0,15,0,0" Header="Joueurs">
+                        <StackPanel>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                            <TextBlock Text="sdd"/>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <Border Background="#252525" 
+                Margin="5, 10, 10, 10"
+                BorderThickness="0"
+                CornerRadius="5"
+                Grid.Column="1">
+            <ListView Background="Transparent" 
+                      BorderThickness="0"
+                      ItemsSource="{Binding Global.Bots.RequestPlayers}">
+            
+            </ListView>
+        </Border>
+    </Grid>
 </UserControl>

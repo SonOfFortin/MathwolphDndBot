@@ -21,12 +21,6 @@ namespace MathwolphDndBot
             //}
         }
 
-        private void ChangeCtrlConnectionSattus(bool value)
-        {
-            //txt_chanel.IsEnabled = value;
-            //txt_token.IsEnabled = value;
-        }
-
         private void Button_Click_add_player(object sender, RoutedEventArgs e)
         {
             //if (sender == null)
