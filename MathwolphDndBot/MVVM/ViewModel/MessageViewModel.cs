@@ -1,10 +1,5 @@
 ﻿using MathwolphDndBot.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace MathwolphDndBot.MVVM.ViewModel
 {
@@ -13,17 +8,25 @@ namespace MathwolphDndBot.MVVM.ViewModel
         public GlobalViewModel Global { get; } = GlobalViewModel.Instance;
 
         public string NbrWaitUsers { get { return $"Utilisateur en attente ({Global.Bots.RequestPlayers.Count.ToString()})"; } }
+        public string NbrPlayers { get { return $"Joueurs ({Global.Bots.Players.Count.ToString()})"; } }
 
-        public RelayCommand AddUsersCommand { get; set; }
+        public RelayCommand PlayersAcceptedCommand { get; set; }
+        public RelayCommand PlayersDeniedCommand { get; set; }
 
-        public MessageViewModel()
+    public MessageViewModel()
         {
-            AddUsersCommand = new RelayCommand(o => {
-                Console.WriteLine("ClickMode AddUsersCommand");
+            PlayersAcceptedCommand = new RelayCommand(o => {
+                Global.Bots.RequestPlayersAccepted(o.ToString());
 
-                Global.Bots.addTestUser();
+                this.OnPropertyChanged("NbrWaitUsers");
+                this.OnPropertyChanged("NbrPlayers");
             });
 
+            PlayersDeniedCommand = new RelayCommand(o => {
+                Global.Bots.RequestPlayersDenied(o.ToString());
+
+                this.OnPropertyChanged("NbrWaitUsers");
+            });
         }
     }
 }

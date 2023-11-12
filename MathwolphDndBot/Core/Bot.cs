@@ -82,8 +82,11 @@ namespace MathwolphDndBot.Core
 
                 AddTerminal("[Bot]: Connected", TerminalType.Succes);
 
-                Players.Clear();
-                RequestPlayers.Clear();
+                App.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    Players.Clear();
+                    RequestPlayers.Clear();
+                });
 
                 IsConnected = true;
 
@@ -136,6 +139,13 @@ namespace MathwolphDndBot.Core
                     if (RequestPlayers.Any(str => str.Contains(e.Command.ChatMessage.DisplayName)))
                     {
                         client.SendMessage(Settings.Default.ChannelName, "Est le cave tu est déjà en attente d'approbation");
+
+                        break;
+                    }
+
+                    if (Players.Any(str => str.Name.Contains(e.Command.ChatMessage.DisplayName)))
+                    {
+                        client.SendMessage(Settings.Default.ChannelName, "Est le cave tu est déjà dans les joueurs");
 
                         break;
                     }
@@ -209,6 +219,33 @@ namespace MathwolphDndBot.Core
             sendClose = true;
 
             client.Disconnect();
+        }
+
+        public void RequestPlayersAccepted(string name)
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                RequestPlayers.Remove(name);
+
+                Players.Add(new User
+                {
+                    Access = Access.Player,
+                    Name = name
+                });
+            });
+
+            client.SendMessage(Settings.Default.ChannelName, $"{name} Bienvenu dans les joueurs.");
+        }
+
+        public void RequestPlayersDenied(string name)
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                RequestPlayers.Remove(name);
+            });
+
+            client.SendMessage(Settings.Default.ChannelName, $"{name} Votre demande pour joindre les jouers a été refusés!");
+
         }
     }
 }

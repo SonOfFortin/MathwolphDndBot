@@ -99,11 +99,10 @@
                              Command="{Binding ShowConnexionView}" 
                              Margin="7"/>
 
-                <RadioButton Content="Utilisateur"
+                <!--<RadioButton Content="Utilisateur"
                              extensions:Extensions.Icon="&#xf234;"
                              Command="{Binding ShowUserView}"
-                             IsEnabled="{Binding Global.Bots.IsConnected}"
-                             Visibility="Collapsed"/>
+                             IsEnabled="{Binding Global.Bots.IsConnected}"/>-->
 
                 <RadioButton Content="Message"
                              extensions:Extensions.Icon="&#xf4ad;"

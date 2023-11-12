@@ -14,12 +14,17 @@
                 <ResourceDictionary Source="/Themes/ExpanderTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/FormControlTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/MenuButtonTheme.Nord.xaml"/>
+                <ResourceDictionary Source="/Themes/PlayersListTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/ScrollBarTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/TitleBarButtonTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/WaitUsersListTheme.Nord.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--<FontFamily x:Key="FontAwesome">/MathwolphDndBot;component/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid</FontFamily>-->
+
+            <!--<DataContex>
+                
+            </DataContex>-->
 
             <DataTemplate DataType="{x:Type vms:ConnexionViewModel}">
                 <view:ConnexionView />
@@ -37,9 +42,9 @@
                 <view:MessageView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:UserViewModel}">
+            <!--<DataTemplate DataType="{x:Type vms:UserViewModel}">
                 <view:UserView />
-            </DataTemplate> 
+            </DataTemplate>--> 
         </ResourceDictionary>
     </Application.Resources>
 </Application>

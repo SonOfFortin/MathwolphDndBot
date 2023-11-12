@@ -3,7 +3,7 @@
 
     <FontFamily x:Key="FontAwesome">/MathwolphDndBot;component/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid</FontFamily>
 
-    <Style TargetType="Button" x:Key="listWaitUsersBtn">
+    <Style TargetType="Button" x:Key="listPlayersBtn">
         <Setter Property="Height" Value="40"/>
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -15,6 +15,7 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Width" Value="35"/>
         <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="Content" Value="&#xf141;"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -34,7 +35,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="listWaitUsersImg">
+    <Style TargetType="TextBlock" x:Key="listPlayersImg">
         <Setter Property="Text" Value="&#xf007;"/>
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
         <Setter Property="FontSize" Value="20"/>
@@ -43,7 +44,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
-    <Style TargetType="ListView" x:Key="listWaitUsers">
+    <Style TargetType="ListView" x:Key="listPlayers">
         <Setter Property="Background" Value="#252525"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
@@ -56,7 +57,7 @@
                 <Style TargetType="ListViewItem">
                     <Setter Property="Margin" Value="0"/>
                     <Setter Property="Padding" Value="0"/>
-                    
+
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListViewItem">
@@ -74,8 +75,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="228"/>
-                            <ColumnDefinition Width="35"/>
+                            <ColumnDefinition Width="263"/>
                             <ColumnDefinition Width="35"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -83,7 +83,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Column="0"
-                                   Style="{StaticResource listWaitUsersImg}"/>
+                                   Style="{StaticResource listPlayersImg}"/>
 
                         <Border Grid.Column="1" BorderThickness="0" Height="40" Padding="5, 0">
                             <TextBlock Text="{Binding}"
@@ -93,17 +93,8 @@
                         </Border>
 
                         <Button Grid.Column="2"
-                                Style="{StaticResource listWaitUsersBtn}" 
-                                Content="&#xf058;"
-                                Foreground="Green"
+                                Style="{StaticResource listPlayersBtn}" 
                                 Command="{Binding DataContext.PlayersAcceptedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"
-                                CommandParameter="{Binding}"/>
-
-                        <Button Grid.Column="3" 
-                                Style="{StaticResource listWaitUsersBtn}" 
-                                Content="&#xf057;"
-                                Foreground="Red"
-                                Command="{Binding DataContext.PlayersDeniedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"
                                 CommandParameter="{Binding}"/>
 
                         <Grid.Style>
