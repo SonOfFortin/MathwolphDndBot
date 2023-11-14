@@ -56,10 +56,14 @@
 
   <ItemGroup>
     <None Remove="Fonts\FontAwesome.otf" />
+    <None Remove="Image\Wolf bolt emblem2.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Fonts\FontAwesome.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\Wolf bolt emblem2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

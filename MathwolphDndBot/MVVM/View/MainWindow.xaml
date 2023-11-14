@@ -7,11 +7,14 @@
         xmlns:extensions="clr-namespace:MathwolphDndBot.Core"
         xmlns:viewmodel="clr-namespace:MathwolphDndBot.MVVM.ViewModel"
         mc:Ignorable="d"
-        Height="450" Width="800"
+        Height="800" 
+        Width="1200"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize" 
+        Icon="/Image/Wolf bolt emblem2.png" 
+        Title="MathWolph DND Bot Chat">
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
@@ -111,12 +114,11 @@
 
                 <RadioButton Content="Console"
                              extensions:Extensions.Icon="&#xf120;"
-                             Command="{Binding ShowConsoleView}"
-                             IsEnabled="{Binding Global.Bots.IsConnected}"/>
+                             Command="{Binding ShowConsoleView}"/>
 
-                <RadioButton Content="Settings"
+                <!--<RadioButton Content="Settings"
                              extensions:Extensions.Icon="&#xf013;"
-                             Command="{Binding ShowSettingsView}"/>
+                             Command="{Binding ShowSettingsView}"/>-->
             </StackPanel>
         </Border>
 

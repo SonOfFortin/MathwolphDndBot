@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System;
 using MathwolphDndBot.MVVM.Model;
 using MathwolphDndBot.Properties;
+using TwitchLib.Client.Extensions;
 
 namespace MathwolphDndBot.Core
 {
@@ -15,6 +16,8 @@ namespace MathwolphDndBot.Core
     {
         private ConnectionCredentials? creds;
         private TwitchClient client = new TwitchClient();
+        private Random rnd = new Random();
+        private string[] Dices = { "4", "6", "8", "10", "12", "20", "100" };
 
         private bool sendClose = false;
         private const int _maxElemTerminal = 200;
@@ -24,6 +27,7 @@ namespace MathwolphDndBot.Core
         public ObservableCollection<User> Players { get; internal set; }
         public ObservableCollection<string> RequestPlayers { get; set; }
         public ObservableCollection<Terminal> Terminals { get; set; }
+        public ObservableCollection<Message> Messages { get; set; }
 
         public bool IsConnected {
             get {  return _isConnected; }
@@ -33,6 +37,7 @@ namespace MathwolphDndBot.Core
                 OnPropertyChanged();
             } 
         }
+
         public string StrConnexionStatus {
             get { return _strConnexionStatus; }
             internal set { 
@@ -47,6 +52,7 @@ namespace MathwolphDndBot.Core
             Players = new ObservableCollection<User>();
             RequestPlayers = new ObservableCollection<string>();
             Terminals = new ObservableCollection<Terminal>();
+            Messages = new ObservableCollection<Message>();
         }
 
         internal void Connect()
@@ -86,24 +92,148 @@ namespace MathwolphDndBot.Core
                 {
                     Players.Clear();
                     RequestPlayers.Clear();
+                    Messages.Clear();
                 });
 
                 IsConnected = true;
 
-                addTestUser();
+#if DEBUG
+                RequestPlayers.Add("cannibal20");
+                RequestPlayers.Add("Cannibal21");
+                RequestPlayers.Add("Cannibal22");
+
+                var mat = new User
+                {
+                    Access = Access.Player,
+                    Name = "MathWolph"
+                };
+
+                var spiky = new User
+                {
+                    Access = Access.Player,
+                    Name = "SpikyPigeon"
+                };
+
+                var can = new User
+                {
+                    Access = Access.Player,
+                    Name = "cannibal20"
+                };
+
+                App.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    Players.Add(mat);
+                    Players.Add(can);
+                    Players.Add(spiky);
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = new DateTime(2023, 07, 23, 12, 42, 0),
+                    Msg = "Message 1",
+                    Type = MessageType.First,
+                    User = spiky
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = new DateTime(2023, 07, 23, 12, 43, 0),
+                    Msg = "Message 2",
+                    Type = MessageType.Normal,
+                    User = spiky
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now.AddDays(-3),
+                    Msg = "Ben non",
+                    Type = MessageType.First,
+                    User = can
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = new DateTime(2023, 11, 13, 12, 42, 0),
+                    Msg = "C'est pas de même",
+                    Type = MessageType.AffDate,
+                    User = can
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.",
+                    Type = MessageType.AffDate,
+                    User = can
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "Fait cas autrement",
+                    Type = MessageType.Normal,
+                    User = can
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "Taisez vous les gas",
+                    Type = MessageType.First,
+                    User = mat
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "On test le chat",
+                    Type = MessageType.Normal,
+                    User = mat
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "Aaaa math",
+                    Type = MessageType.First,
+                    User = spiky
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "Salut tlm",
+                    Type = MessageType.Normal,
+                    User = spiky
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "Lèche botte",
+                    Type = MessageType.First,
+                    User = can
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "Pk pas",
+                    Type = MessageType.First,
+                    User = spiky
+                });
+
+                Messages.Add(new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+                    Type = MessageType.First,
+                    User = mat
+                });
+#endif
             }
 
             sendClose = false;
-        }
-
-        public void addTestUser()
-        {
-            App.Current.Dispatcher.Invoke((Action)delegate
-            {
-                RequestPlayers.Add("Cannibal20");
-                RequestPlayers.Add("Cannibal21");
-                RequestPlayers.Add("Cannibal22");
-            });
         }
 
         private void Client_OnDisconnected(object? sender, OnDisconnectedEventArgs e)
@@ -120,30 +250,15 @@ namespace MathwolphDndBot.Core
             //Liste des commande pour tout le monde
             switch (e.Command.CommandText.ToLower())
             {
-                /*case "dice":
-                    client.SendMessage(Settings.Default.ChannelName, "Ain't got no dice");
-                    break;*/
-                case "join":
-                    client.SendMessage(Settings.Default.ChannelName, "Arrête de le dire et roule le estie qu'on le fume");
-
-                    break;
-                case "sexavecmath":
-                    client.SendMessage(Settings.Default.ChannelName, "Math n'est pas ouvert à cette proposition la, il a des morpions. Mais spiky ouiii");
-                    break;
-
-                case "sexaveccannibal":
-                    client.SendMessage(Settings.Default.ChannelName, "Ahh, fresh meat!");
-                    break;
-
-                case "joint":
-                    if (RequestPlayers.Any(str => str.Contains(e.Command.ChatMessage.DisplayName)))
+                case "dndjoin":
+                    if (RequestPlayers.Any(str => str.Equals(e.Command.ChatMessage.DisplayName)))
                     {
                         client.SendMessage(Settings.Default.ChannelName, "Est le cave tu est déjà en attente d'approbation");
 
                         break;
                     }
 
-                    if (Players.Any(str => str.Name.Contains(e.Command.ChatMessage.DisplayName)))
+                    if (Players.Any(str => str.Name.Equals(e.Command.ChatMessage.DisplayName)))
                     {
                         client.SendMessage(Settings.Default.ChannelName, "Est le cave tu est déjà dans les joueurs");
 
@@ -158,23 +273,90 @@ namespace MathwolphDndBot.Core
                     client.SendMessage(Settings.Default.ChannelName, "Votre demande a été envoyé");
 
                     break;
+                default:
+                    if (Players.Any(str => str.Name.Equals(e.Command.ChatMessage.DisplayName)))
+                    {
+                        PlayerCommand(e.Command, e.Command.ChatMessage.DisplayName);
+
+                        break;
+                    }
+
+                    break;
             }
 
             //Liste des commande de l'Administrateur
-            if (e.Command.ChatMessage.DisplayName.ToLower() == Settings.Default.ChannelName.ToLower())
+            //if (e.Command.ChatMessage.DisplayName.ToLower() == Settings.Default.ChannelName.ToLower())
+            //{
+            //    switch (e.Command.CommandText.ToLower())
+            //    {
+            //        case "hi":
+            //            client.SendMessage(Settings.Default.ChannelName, "Hi Boss but cannibal20 is your god");
+            //            break;
+            //    }
+            //}
+        }
+
+        private void PlayerCommand(ChatCommand command, string PlayerNamer)
+        {
+            if (command.CommandText.ToLower().Substring(1,4) == "roll")
             {
-                switch (e.Command.CommandText.ToLower())
+                var nbr = command.CommandText.ToLower().Replace("roll", "");
+                //long nResult = 0;
+
+                if (!Dices.Contains(nbr))
                 {
-                    case "hi":
-                        client.SendMessage(Settings.Default.ChannelName, "Hi Boss but cannibal20 is your god");
-                        break;
+                    client.SendMessage(Settings.Default.ChannelName, "Dé non suppoté");
+                    return;
                 }
+
+                var s = rnd.Next(1, int.Parse(nbr));
+
+                client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Résultat:{s}");
             }
         }
 
         private void Client_OnMessageReceived(object? sender, OnMessageReceivedArgs e)
         {
-            Trace.WriteLine($"[{e.ChatMessage.DisplayName}]: {e.ChatMessage.Message}");
+            //Trace.WriteLine($"[{e.ChatMessage.DisplayName}]: {e.ChatMessage.Message}");
+            var usr = Players.First(str => str.Name == e.ChatMessage.DisplayName);
+
+            if (usr != null)
+            {
+                var addInfo = new Message
+                {
+                    Moment = DateTime.Now,
+                    Msg = e.ChatMessage.Message,
+                    Type = MessageType.Normal,
+                    User = usr
+                };
+
+                var lastMsg = Messages.LastOrDefault();
+
+                if (lastMsg.User.Name != addInfo.User.Name)
+                {
+                    addInfo.Type = MessageType.First;
+                }
+                else
+                {
+                    if (((int)(addInfo.Moment - lastMsg.Moment).TotalDays) > 0)
+                    {
+                        if (((int)(addInfo.Moment - lastMsg.Moment).TotalMinutes) > 5)
+                        {
+                            addInfo.Type = MessageType.TimeDiff;
+                        }
+                    }
+                    else
+                    {
+                        addInfo.Type = MessageType.AffDate;
+
+                    }
+                }
+
+                App.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    Messages.Add(addInfo);
+                });
+            }
         }
 
         private void Client_OnError(object? sender, OnErrorEventArgs e)

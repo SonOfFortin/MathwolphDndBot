@@ -36,50 +36,10 @@
                 BorderThickness="0"
                 CornerRadius="5"
                 Grid.Column="1">
-            <!--<ListView Background="Transparent" 
+            <ListView Background="Transparent" 
                       BorderThickness="0"
-                      ItemsSource="{Binding Global.Bots.RequestPlayers}">
-            
-            </ListView>-->
-
-            <Grid Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <Grid.RowDefinitions>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                    <RowDefinition MinHeight="20"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <TextBlock Grid.Column="0" Grid.Row="0"
-                           Style="{StaticResource listPlayersImg}"/>
-
-                <StackPanel Grid.Column="1" 
-                            Grid.Row="0"
-                            VerticalAlignment="Center">
-                    <Label Content="Cannibal20 14:29"
-                           Foreground="Gray"
-                           FontSize="8"
-                           Margin="0,-5,0,-5"/>
-                    <Border CornerRadius="4" 
-                            BorderThickness="1"
-                            Background="">
-                        <Label Content="Messafe 1" />
-                    </Border>
-                </StackPanel>
-            </Grid>
+                      ItemsSource="{Binding Global.Bots.Messages}"
+                      Style="{StaticResource listMesssages}"/>
         </Border>
     </Grid>
 </UserControl>

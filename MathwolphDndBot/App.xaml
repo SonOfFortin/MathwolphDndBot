@@ -1,4 +1,6 @@
-﻿<Application x:Class="MathwolphDndBot.App"
+﻿ <!--Google Twich token generator : https://twitchtokengenerator.com/-->
+    
+<Application x:Class="MathwolphDndBot.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MathwolphDndBot"
@@ -8,31 +10,30 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <FontFamily x:Key="FontAwesome">/MathwolphDndBot;component/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid</FontFamily>
+                </ResourceDictionary>
+
                 <!-- Themes -->
                 <ResourceDictionary Source="/Themes/ConnectButtonTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/ConsoleListTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/ExpanderTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/FormControlTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/MenuButtonTheme.Nord.xaml"/>
+                <ResourceDictionary Source="/Themes/MessagesListTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/PlayersListTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/ScrollBarTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/TitleBarButtonTheme.Nord.xaml"/>
                 <ResourceDictionary Source="/Themes/WaitUsersListTheme.Nord.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!--<FontFamily x:Key="FontAwesome">/MathwolphDndBot;component/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid</FontFamily>-->
-
-            <!--<DataContex>
-                
-            </DataContex>-->
-
             <DataTemplate DataType="{x:Type vms:ConnexionViewModel}">
                 <view:ConnexionView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:SettingsViewModel}">
+            <!--<DataTemplate DataType="{x:Type vms:SettingsViewModel}">
                 <view:SettingsView />
-            </DataTemplate>
+            </DataTemplate>-->
 
             <DataTemplate DataType="{x:Type vms:ConsoleViewModel}">
                 <view:ConsoleView />
@@ -44,7 +45,7 @@
 
             <!--<DataTemplate DataType="{x:Type vms:UserViewModel}">
                 <view:UserView />
-            </DataTemplate>--> 
+            </DataTemplate>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>
