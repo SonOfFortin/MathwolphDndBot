@@ -15,7 +15,7 @@
                             <TextBox VerticalAlignment="Center"
                                      VerticalContentAlignment="Center"
                                      x:Name="FormControlInput"
-                                     Text="{TemplateBinding Text}"
+                                     Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                      IsEnabled="{TemplateBinding IsEnabled}"
                                      Foreground="#dee2e6"
                                      Background="Transparent"

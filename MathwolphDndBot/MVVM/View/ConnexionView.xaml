@@ -33,12 +33,12 @@
                     HorizontalAlignment="Center"
                     Width="250">
 
-            <TextBox Text="{Binding Chanel}"
+            <TextBox Text="{Binding Chanel, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
                      extensions:Extensions.Label="Nom de la chaîne"
                      Style="{StaticResource FormControlInput}"
                      extensions:Extensions.IsDisabled="{Binding Global.Bots.IsConnected}"/>
 
-            <TextBox Text="{Binding Token}"
+            <TextBox Text="{Binding Token, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
                      extensions:Extensions.Label="Jeton D'accès"
                      Style="{StaticResource FormControlInput}"
                      extensions:Extensions.IsDisabled="{Binding Global.Bots.IsConnected}"/>
