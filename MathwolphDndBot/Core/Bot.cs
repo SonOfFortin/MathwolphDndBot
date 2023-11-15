@@ -9,6 +9,7 @@ using System;
 using MathwolphDndBot.MVVM.Model;
 using MathwolphDndBot.Properties;
 using TwitchLib.Client.Extensions;
+using System.Collections.Generic;
 
 namespace MathwolphDndBot.Core
 {
@@ -253,14 +254,14 @@ namespace MathwolphDndBot.Core
                 case "dndjoin":
                     if (RequestPlayers.Any(str => str.Equals(e.Command.ChatMessage.DisplayName)))
                     {
-                        client.SendMessage(Settings.Default.ChannelName, "Est le cave tu est déjà en attente d'approbation");
+                        client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} tu est déjà en attente d'approbation");
 
                         break;
                     }
 
                     if (Players.Any(str => str.Name.Equals(e.Command.ChatMessage.DisplayName)))
                     {
-                        client.SendMessage(Settings.Default.ChannelName, "Est le cave tu est déjà dans les joueurs");
+                        client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} tu est déjà dans les joueurs");
 
                         break;
                     }
@@ -270,7 +271,7 @@ namespace MathwolphDndBot.Core
                         RequestPlayers.Add(e.Command.ChatMessage.DisplayName);
                     });
 
-                    client.SendMessage(Settings.Default.ChannelName, "Votre demande a été envoyé");
+                    client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} Votre demande a été envoyé");
 
                     break;
                 default:
@@ -298,20 +299,62 @@ namespace MathwolphDndBot.Core
 
         private void PlayerCommand(ChatCommand command, string PlayerNamer)
         {
-            if (command.CommandText.ToLower().Substring(1,4) == "roll")
+            if (command.CommandText.ToLower().Trim() == "roll")
             {
-                var nbr = command.CommandText.ToLower().Replace("roll", "");
-                //long nResult = 0;
-
-                if (!Dices.Contains(nbr))
-                {
-                    client.SendMessage(Settings.Default.ChannelName, "Dé non suppoté");
+                if(command.ArgumentsAsList.Count != 1) 
+                { 
+                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Paramètre non suppoté");
                     return;
                 }
 
-                var s = rnd.Next(1, int.Parse(nbr));
+                var tObj = command.ArgumentsAsString.Trim().ToLower().Split('d');
 
-                client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Résultat:{s}");
+                if(tObj.Length > 0 && tObj.Length < 3) 
+                {
+                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Paramètre non suppoté");
+                    return;
+                }
+
+                var time = 1;
+                var dice = string.Empty;
+
+                if (tObj.Length == 2)
+                {
+                    dice = tObj[1];
+
+                    if(!int.TryParse(tObj[2], out time))
+                    {
+                        client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Nombre de l'ancée non supporté");
+                        return;
+                    }
+
+                    if(time == 0)
+                    {
+                        client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Nombre de l'ancée non supporté");
+                        return;
+                    }
+                }
+                else
+                {
+                    dice = tObj[0];
+                }                
+
+                if (!Dices.Contains(dice))
+                {
+                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Dé non suppoté");
+                    return;
+                }
+
+                var result = new List<int>();
+
+                for (int i = 0; i < time; i++) 
+                {
+                    var s = rnd.Next(1, int.Parse(dice));
+
+                    result.Add(s);
+                }
+
+                client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Résultat:{String.Join(", ",result)}");
             }
         }
 

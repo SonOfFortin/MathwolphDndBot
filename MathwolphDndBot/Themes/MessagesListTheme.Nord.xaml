@@ -93,16 +93,6 @@
                                                        VerticalAlignment="Center"
                                                        Text="{Binding Msg}"
                                                        FontWeight="SemiBold"/>
-                                            
-                                            <!--<Border.Style>
-                                                <Style TargetType="Border">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=Type}" Value="{x:Static my:MessageType.Normal}">
-                                                            <Setter Property="Margin" Value="0,3,0,0"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>-->
                                         </Border>
                                     </StackPanel>
 
