@@ -16,14 +16,17 @@
                 Margin="10, 10, 5, 10"
                 BorderThickness="0"
                 CornerRadius="5">
+            
             <ScrollViewer BorderThickness="0" Margin="15, 15, 8, 15">
                 <StackPanel Margin="0,0,8,0">
-                    <Expander Header="{Binding NbrWaitUsers}">
+                    <Expander Header="{Binding TitleWaitUsers}"
+                                Tag="{Binding NbrWaitUsers}">
                         <ListView Style="{StaticResource listWaitUsers}"
                                   ItemsSource="{Binding Global.Bots.RequestPlayers}"/>
                     </Expander>
 
-                    <Expander Margin="0,15,0,0" Header="{Binding NbrPlayers}">
+                    <Expander Margin="0,15,0,0" Header="{Binding TitlePlayers}"
+                              Tag="{Binding NbrPlayers}">
                         <ListView Style="{StaticResource listPlayers}"
                             ItemsSource="{Binding Global.Bots.Players}"/>
                     </Expander>

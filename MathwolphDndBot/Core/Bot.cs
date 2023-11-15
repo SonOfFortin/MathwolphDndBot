@@ -87,7 +87,7 @@ namespace MathwolphDndBot.Core
             {
                 StrConnexionStatus = "Connected";
 
-                AddTerminal("[Bot]: Connected", TerminalType.Succes);
+                AddTerminal("[Bot]: Connected.", TerminalType.Succes);
 
                 App.Current.Dispatcher.Invoke((Action)delegate
                 {
@@ -241,7 +241,7 @@ namespace MathwolphDndBot.Core
         {
             StrConnexionStatus = "Disconnected";
 
-            AddTerminal("[Bot]: Disconnected", TerminalType.Succes);
+            AddTerminal("[Bot]: Disconnected.", TerminalType.Succes);
 
             IsConnected = false;
         }
@@ -254,14 +254,14 @@ namespace MathwolphDndBot.Core
                 case "dndjoin":
                     if (RequestPlayers.Any(str => str.Equals(e.Command.ChatMessage.DisplayName)))
                     {
-                        client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} tu est déjà en attente d'approbation");
+                        client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} tu est déjà en attente d'approbation.");
 
                         break;
                     }
 
                     if (Players.Any(str => str.Name.Equals(e.Command.ChatMessage.DisplayName)))
                     {
-                        client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} tu est déjà dans les joueurs");
+                        client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} tu est déjà dans les joueurs.");
 
                         break;
                     }
@@ -271,7 +271,7 @@ namespace MathwolphDndBot.Core
                         RequestPlayers.Add(e.Command.ChatMessage.DisplayName);
                     });
 
-                    client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} Votre demande a été envoyé");
+                    client.SendMessage(Settings.Default.ChannelName, $"{e.Command.ChatMessage.DisplayName} Votre demande a été envoyé.");
 
                     break;
                 default:
@@ -303,7 +303,7 @@ namespace MathwolphDndBot.Core
             {
                 if(command.ArgumentsAsList.Count != 1) 
                 { 
-                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Paramètre non suppoté");
+                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Paramètre non suppoté.");
                     return;
                 }
 
@@ -311,7 +311,7 @@ namespace MathwolphDndBot.Core
 
                 if(tObj.Length > 0 && tObj.Length < 3) 
                 {
-                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Paramètre non suppoté");
+                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Paramètre non suppoté.");
                     return;
                 }
 
@@ -324,13 +324,13 @@ namespace MathwolphDndBot.Core
 
                     if(!int.TryParse(tObj[2], out time))
                     {
-                        client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Nombre de l'ancée non supporté");
+                        client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Nombre de l'ancée non supporté.");
                         return;
                     }
 
                     if(time == 0)
                     {
-                        client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Nombre de l'ancée non supporté");
+                        client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Nombre de l'ancée non supporté.");
                         return;
                     }
                 }
@@ -341,7 +341,7 @@ namespace MathwolphDndBot.Core
 
                 if (!Dices.Contains(dice))
                 {
-                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Dé non suppoté");
+                    client.SendMessage(Settings.Default.ChannelName, $"{PlayerNamer} Dé non suppoté.");
                     return;
                 }
 
@@ -437,7 +437,7 @@ namespace MathwolphDndBot.Core
 
         internal void Disconnect()
         {
-            AddTerminal("[Bot]: Disconnecting ang closing application", TerminalType.Succes);
+            AddTerminal("[Bot]: Disconnecting ang closing application.", TerminalType.Succes);
 
             StrConnexionStatus = "Disconnecting";
 

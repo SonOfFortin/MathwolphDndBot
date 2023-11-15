@@ -1,5 +1,4 @@
 ﻿using MathwolphDndBot.Core;
-using System.ComponentModel;
 
 namespace MathwolphDndBot.MVVM.ViewModel
 {
@@ -7,8 +6,11 @@ namespace MathwolphDndBot.MVVM.ViewModel
     {
         public GlobalViewModel Global { get; } = GlobalViewModel.Instance;
 
-        public string NbrWaitUsers { get { return $"Utilisateur en attente ({Global.Bots.RequestPlayers.Count.ToString()})"; } }
-        public string NbrPlayers { get { return $"Joueurs ({Global.Bots.Players.Count.ToString()})"; } }
+        
+        public string NbrWaitUsers { get { return Global.Bots.RequestPlayers.Count.ToString(); } }
+        public string NbrPlayers { get { return Global.Bots.Players.Count.ToString(); } }
+        public string TitlePlayers { get { return $"Joueurs ({Global.Bots.Players.Count.ToString()})"; } }
+        public string TitleWaitUsers { get { return $"Utilisateur en attente ({Global.Bots.RequestPlayers.Count.ToString()})"; } }
 
         public RelayCommand PlayersAcceptedCommand { get; set; }
         public RelayCommand PlayersDeniedCommand { get; set; }
@@ -18,6 +20,8 @@ namespace MathwolphDndBot.MVVM.ViewModel
             PlayersAcceptedCommand = new RelayCommand(o => {
                 Global.Bots.RequestPlayersAccepted(o.ToString());
 
+                this.OnPropertyChanged("TitleWaitUsers");
+                this.OnPropertyChanged("TitlePlayers");
                 this.OnPropertyChanged("NbrWaitUsers");
                 this.OnPropertyChanged("NbrPlayers");
             });
@@ -25,6 +29,7 @@ namespace MathwolphDndBot.MVVM.ViewModel
             PlayersDeniedCommand = new RelayCommand(o => {
                 Global.Bots.RequestPlayersDenied(o.ToString());
 
+                this.OnPropertyChanged("TitleWaitUsers");
                 this.OnPropertyChanged("NbrWaitUsers");
             });
         }
