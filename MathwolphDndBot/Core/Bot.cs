@@ -10,6 +10,7 @@ using MathwolphDndBot.MVVM.Model;
 using MathwolphDndBot.Properties;
 using TwitchLib.Client.Extensions;
 using System.Collections.Generic;
+using System.Windows.Interop;
 
 namespace MathwolphDndBot.Core
 {
@@ -26,9 +27,9 @@ namespace MathwolphDndBot.Core
         private bool _isConnected = false;
 
         public ObservableCollection<User> Players { get; internal set; }
-        public ObservableCollection<string> RequestPlayers { get; set; }
-        public ObservableCollection<Terminal> Terminals { get; set; }
-        public ObservableCollection<Message> Messages { get; set; }
+        public ObservableCollection<string> RequestPlayers { get; internal set; }
+        public ObservableCollection<Terminal> Terminals { get; internal set; }
+        public ObservableCollection<Message> Messages { get; internal set; }
 
         public bool IsConnected {
             get {  return _isConnected; }
@@ -349,7 +350,7 @@ namespace MathwolphDndBot.Core
 
                 for (int i = 0; i < time; i++) 
                 {
-                    var s = rnd.Next(1, int.Parse(dice));
+                    var s = rnd.Next(1, int.Parse(dice) + 1);
 
                     result.Add(s);
                 }
@@ -471,6 +472,22 @@ namespace MathwolphDndBot.Core
 
             client.SendMessage(Settings.Default.ChannelName, $"{name} Votre demande pour joindre les jouers a été refusés!");
 
+        }
+
+        public void RequestPlayersClear()
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                RequestPlayers.Clear();
+            });
+        }
+
+        public void PlayerClear()
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                Players.Clear();
+            });
         }
     }
 }
