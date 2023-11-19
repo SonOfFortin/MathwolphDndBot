@@ -1,4 +1,5 @@
 ﻿using MathwolphDndBot.Core;
+using MathwolphDndBot.MVVM.Model;
 using System;
 using System.Windows;
 
@@ -18,6 +19,7 @@ namespace MathwolphDndBot.MVVM.ViewModel
         public RelayCommand ClearPlayerCommand { get; set; }
         public RelayCommand ClearWaitUsersCommand {  get; set; }
         public RelayCommand AcceptRamdomWaitUserCommand { get; set; }
+        public RelayCommand PlayersRemoveCommand { get; set; }
 
         private int _;
 
@@ -73,6 +75,14 @@ namespace MathwolphDndBot.MVVM.ViewModel
                 this.OnPropertyChanged("NbrWaitUsers");
                 this.OnPropertyChanged("NbrPlayers");
             });
+
+            PlayersRemoveCommand = new RelayCommand(o =>
+            {
+                Global.Bots.RemovePlayers(o.ToString());
+
+                this.OnPropertyChanged("TitlePlayers");
+                this.OnPropertyChanged("NbrPlayers");
+            });       
         }
     }
 }

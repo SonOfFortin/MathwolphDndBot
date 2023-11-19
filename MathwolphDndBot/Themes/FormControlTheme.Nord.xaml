@@ -35,10 +35,9 @@
                                     <Setter Property="IsEnabled" Value="True"/>
 
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=(extensions:Extensions.IsDisabled), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True">
+                                        <Trigger Property="IsEnabled" Value="False">
                                             <Setter Property="Background" Value="#343a40"/>
-                                            <Setter Property="IsEnabled" Value="False"/>
-                                        </DataTrigger>
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>

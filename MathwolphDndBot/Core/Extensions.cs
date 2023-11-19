@@ -9,8 +9,6 @@ namespace MathwolphDndBot.Core
             DependencyProperty.RegisterAttached("Icon", typeof(string), typeof(Extensions), new PropertyMetadata(default(string)));
         public static readonly DependencyProperty Label =
             DependencyProperty.RegisterAttached("Label", typeof(string), typeof(Extensions), new PropertyMetadata(default(string)));
-        public static readonly DependencyProperty IsDisabled =
-            DependencyProperty.RegisterAttached("IsDisabled", typeof(string), typeof(Extensions), new PropertyMetadata(default(string)));
 
         private static void OnProductTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -35,16 +33,6 @@ namespace MathwolphDndBot.Core
         public static string GetLabel(UIElement element) 
         {
             return (string)element.GetValue(Label);
-        }
-
-        public static void SetIsDisabled(UIElement element, string value)
-        {
-            element.SetCurrentValue(IsDisabled, value);
-        }
-
-        public static string GetIsDisabled(UIElement element)
-        {
-            return (string)element.GetValue(IsDisabled);
         }
     }
 }

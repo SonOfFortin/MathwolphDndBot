@@ -11,8 +11,10 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Width" Value="35"/>
-        <Setter Property="Foreground" Value="LightGray"/>
-        <Setter Property="Content" Value="&#xf141;"/>
+        <!--<Setter Property="Foreground" Value="LightGray"/>-->
+        <!--<Setter Property="Content" Value="&#xf141;"/>-->
+        <Setter Property="Content" Value="&#xf057;"/>
+        <Setter Property="Foreground" Value="Red"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -94,7 +96,9 @@
                                 Command="{Binding DataContext.PlayersAcceptedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"
                                 CommandParameter="{Binding}"/>-->
                         <Button Grid.Column="2"
-                                Style="{StaticResource listPlayersBtn}"/>
+                                Style="{StaticResource listPlayersBtn}"
+                                Command="{Binding DataContext.PlayersRemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"
+                                CommandParameter="{Binding Name}"/>
 
                         <Grid.Style>
                             <Style TargetType="{x:Type Grid}">

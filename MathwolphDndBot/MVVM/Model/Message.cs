@@ -26,7 +26,12 @@ namespace MathwolphDndBot.MVVM.Model
 
                     if (dDif > 7)
                     {
-                        return Moment.ToString("MM/dd/yyyy h:mm tt");
+                        if(dDif > 365) 
+                        {
+                            return Moment.ToString("dd/MM/yyyy h:mm tt");
+                        }
+
+                        return Moment.ToString("dd/MM h:mm tt");
                     }
 
                     if (dDif < 2)
