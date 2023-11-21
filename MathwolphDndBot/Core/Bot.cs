@@ -192,9 +192,11 @@ namespace MathwolphDndBot.Core
 
                     break;
                 default:
-                    if (Players.Any(str => str.Name.Equals(e.Command.ChatMessage.DisplayName)))
+                    var usr = Players.FirstOrDefault(str => str.Name == e.Command.ChatMessage.DisplayName);
+
+                    if (usr != null)
                     {
-                        PlayerCommand(e.Command);
+                        PlayerCommand(e.Command, usr);
 
                         break;
                     }
@@ -214,7 +216,7 @@ namespace MathwolphDndBot.Core
             //}
         }
 
-        private void PlayerCommand(ChatCommand command)
+        private void PlayerCommand(ChatCommand command, User usr)
         {
             if (command.CommandText.ToLower().Trim() == "roll")
             {
@@ -227,6 +229,8 @@ namespace MathwolphDndBot.Core
                 var msg = RollDice(command.ArgumentsAsList);
 
                 client.SendMessage(Settings.Default.ChannelName, $"{command.ChatMessage.DisplayName} {msg}");
+
+                MessageAdd(usr, msg, DateTime.Now);
             }
         }
 
@@ -284,7 +288,7 @@ namespace MathwolphDndBot.Core
                 result.Add(s);
             }
 
-            return $"Résultat:{String.Join(", ", result)}";
+            return $"Résultat: {String.Join(", ", result)}";
         }
 
         private void Client_OnMessageReceived(object? sender, OnMessageReceivedArgs e)
