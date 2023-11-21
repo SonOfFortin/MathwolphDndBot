@@ -19,7 +19,7 @@
             
             <ScrollViewer BorderThickness="0" Margin="15, 15, 8, 15">
                 <StackPanel Margin="0,0,8,0">
-                    <Expander Tag="{Binding NbrWaitUsers}">
+                    <Expander Tag="{Binding Path=Global.Bots.RequestPlayers.Count, Mode=OneWay, UpdateSourceTrigger=Default}">
                         <Expander.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -27,9 +27,9 @@
                                     <ColumnDefinition Width="25"/>
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <TextBlock Grid.Column="0"
-                                           Text="{Binding TitleWaitUsers}"
+                                           Text="{Binding Path=Global.Bots.RequestPlayers.Count, StringFormat=Utilisateur en attente ({0}), Mode=OneWay, UpdateSourceTrigger=Default}"
                                            Style="{StaticResource ExpanderHeaderTextStyle}"/>
 
                                 <Button Grid.Column="1" 
@@ -51,7 +51,7 @@
                     </Expander>
 
                     <Expander Margin="0,15,0,0"
-                              Tag="{Binding NbrPlayers}">
+                              Tag="{Binding Path=Global.Bots.Players.Count, Mode=OneWay, UpdateSourceTrigger=Default}">
                         <Expander.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -60,7 +60,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0"
-                                           Text="{Binding TitlePlayers}"
+                                           Text="{Binding Path=Global.Bots.Players.Count, StringFormat=Joueurs ({0}), Mode=OneWay, UpdateSourceTrigger=Default}"
                                            Style="{StaticResource ExpanderHeaderTextStyle}"/>
 
                                 <Button Grid.Column="1" 

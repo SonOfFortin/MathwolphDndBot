@@ -101,54 +101,54 @@ namespace MathwolphDndBot.Core
 
                 IsConnected = true;
 
-#if DEBUG
-                RequestPlayers.Add("cannibal20");
-                RequestPlayers.Add("Cannibal21");
-                RequestPlayers.Add("Cannibal22");
+//#if DEBUG
+//                RequestPlayers.Add("cannibal20");
+//                RequestPlayers.Add("Cannibal21");
+//                RequestPlayers.Add("Cannibal22");
 
-                var mat = new User
-                {
-                    Access = Access.Player,
-                    Name = "MathWolph"
-                };
+//                var mat = new User
+//                {
+//                    Access = Access.Player,
+//                    Name = "MathWolph"
+//                };
 
-                var spiky = new User
-                {
-                    Access = Access.Player,
-                    Name = "SpikyPigeon"
-                };
+//                var spiky = new User
+//                {
+//                    Access = Access.Player,
+//                    Name = "SpikyPigeon"
+//                };
 
-                var can = new User
-                {
-                    Access = Access.Player,
-                    Name = "cannibal20"
-                };
+//                var can = new User
+//                {
+//                    Access = Access.Player,
+//                    Name = "cannibal20"
+//                };
 
-                App.Current.Dispatcher.Invoke((Action)delegate
-                {
-                    Players.Add(mat);
-                    Players.Add(can);
-                    Players.Add(spiky);
-                });
+//                App.Current.Dispatcher.Invoke((Action)delegate
+//                {
+//                    Players.Add(mat);
+//                    Players.Add(can);
+//                    Players.Add(spiky);
+//                });
 
-                MessageAdd(spiky, "Message 1", new DateTime(2023, 07, 23, 12, 42, 0));
-                MessageAdd(spiky, "Message 2", new DateTime(2023, 07, 23, 12, 43, 0));
-                MessageAdd(can, "Ben non", DateTime.Now.AddDays(-3).AddMinutes(-6));
-                MessageAdd(can, "C'est pas de même", DateTime.Now.AddDays(-3));
-                MessageAdd(can, 
-                    "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.", 
-                    DateTime.Now);
-                MessageAdd(can, "Fait cas autrement", DateTime.Now);
-                MessageAdd(mat, "Taisez vous les gas", DateTime.Now);
-                MessageAdd(mat, "On test le chat", DateTime.Now);
-                MessageAdd(spiky, "Aaaa math", DateTime.Now);
-                MessageAdd(spiky, "Salut tlm", DateTime.Now);
-                MessageAdd(can, "Lèche botte", DateTime.Now);
-                MessageAdd(spiky, "Pk pas", DateTime.Now);
-                MessageAdd(mat, 
-                    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", 
-                    DateTime.Now);
-#endif
+//                MessageAdd(spiky, "Message 1", new DateTime(2023, 07, 23, 12, 42, 0));
+//                MessageAdd(spiky, "Message 2", new DateTime(2023, 07, 23, 12, 43, 0));
+//                MessageAdd(can, "Ben non", DateTime.Now.AddDays(-3).AddMinutes(-6));
+//                MessageAdd(can, "C'est pas de même", DateTime.Now.AddDays(-3));
+//                MessageAdd(can, 
+//                    "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.", 
+//                    DateTime.Now);
+//                MessageAdd(can, "Fait cas autrement", DateTime.Now);
+//                MessageAdd(mat, "Taisez vous les gas", DateTime.Now);
+//                MessageAdd(mat, "On test le chat", DateTime.Now);
+//                MessageAdd(spiky, "Aaaa math", DateTime.Now);
+//                MessageAdd(spiky, "Salut tlm", DateTime.Now);
+//                MessageAdd(can, "Lèche botte", DateTime.Now);
+//                MessageAdd(spiky, "Pk pas", DateTime.Now);
+//                MessageAdd(mat, 
+//                    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", 
+//                    DateTime.Now);
+//#endif
             }
 
             sendClose = false;
@@ -264,7 +264,6 @@ namespace MathwolphDndBot.Core
                         return "Nombre de l'ancée non supporté.";
                     }
                 }
-                
             }
             else
             {
@@ -291,7 +290,7 @@ namespace MathwolphDndBot.Core
         private void Client_OnMessageReceived(object? sender, OnMessageReceivedArgs e)
         {
             //Trace.WriteLine($"[{e.ChatMessage.DisplayName}]: {e.ChatMessage.Message}");
-            var usr = Players.First(str => str.Name == e.ChatMessage.DisplayName);
+            var usr = Players.FirstOrDefault(str => str.Name == e.ChatMessage.DisplayName);
 
             if (usr != null)
             {
