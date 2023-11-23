@@ -76,7 +76,7 @@
                                                Text="{TemplateBinding Content}"/>
                                 </Grid>
                             </Border>
-                            <Border x:Name="BorderSepHead" Visibility="Hidden" BorderBrush="Gray" BorderThickness="1"/>
+                            <Border x:Name="BorderSepHead" Visibility="Hidden" BorderBrush="Gray" BorderThickness="0.5"/>
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -88,9 +88,6 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Background" TargetName="spHead" Value="#444444"/>
                             <Setter Property="Cursor" Value="Hand"/>
-                        </Trigger>
-                        <Trigger Property="Tag" Value="0">
-                            <Setter Property="Visibility" TargetName="BorderSepHead" Value="Hidden"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -118,23 +115,21 @@
                         <DockPanel>
                             <ToggleButton x:Name="HeaderSite" 
                                           Content="{TemplateBinding Header}" 
-                                          Tag="{TemplateBinding Tag}"
+                                          Tag="{Binding Path=Tag, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           DockPanel.Dock="Top" 
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                           Style="{StaticResource ExpanderHeaderStyle}" />
 
-                            <ContentPresenter x:Name="ExpandSite" 
-                                              DockPanel.Dock="Bottom" 
-                                              Focusable="false" 
-                                              Margin="0"/>
+
+                                <ContentPresenter DockPanel.Dock="Bottom" x:Name="ExpandSite" 
+                                                  Focusable="false"  Margin="0,0,0,4"/>
+
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="False">
                             <Setter Property="Visibility" TargetName="ExpandSite" Value="Collapsed"/>
-                        </Trigger>
-                        <Trigger Property="Tag" Value="0">
-                            <Setter Property="Visibility" TargetName="ExpandSite" Value="Hidden"/>
+                            <Setter Property="Height" TargetName="ExpandSite" Value="0"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
