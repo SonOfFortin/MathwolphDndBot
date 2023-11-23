@@ -1,7 +1,5 @@
 ﻿using MathwolphDndBot.Core;
 using MathwolphDndBot.Properties;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MathwolphDndBot.MVVM.ViewModel
 {

@@ -120,10 +120,10 @@
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                           Style="{StaticResource ExpanderHeaderStyle}" />
 
-
-                                <ContentPresenter DockPanel.Dock="Bottom" x:Name="ExpandSite" 
-                                                  Focusable="false"  Margin="0,0,0,4"/>
-
+                            <ContentPresenter DockPanel.Dock="Bottom" 
+                                              x:Name="ExpandSite" 
+                                              Focusable="false" 
+                                              Margin="0,0,0,4"/>
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>

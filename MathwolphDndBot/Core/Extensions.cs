@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MathwolphDndBot.Core
 {
@@ -9,11 +8,6 @@ namespace MathwolphDndBot.Core
             DependencyProperty.RegisterAttached("Icon", typeof(string), typeof(Extensions), new PropertyMetadata(default(string)));
         public static readonly DependencyProperty Label =
             DependencyProperty.RegisterAttached("Label", typeof(string), typeof(Extensions), new PropertyMetadata(default(string)));
-
-        private static void OnProductTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         public static void SetIcon(UIElement element, string value)
         {

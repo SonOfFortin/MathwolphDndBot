@@ -8,22 +8,15 @@ using System.Diagnostics;
 using System;
 using MathwolphDndBot.MVVM.Model;
 using MathwolphDndBot.Properties;
-using TwitchLib.Client.Extensions;
 using System.Collections.Generic;
-using System.Windows.Interop;
-using Microsoft.VisualBasic;
-using System.Windows;
-using TwitchLib.Communication.Interfaces;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace MathwolphDndBot.Core
 {
     internal class Bot : ObservableObject
     {
-        private TwitchClient client = new TwitchClient();
-        private Random rnd = new Random();
-        private string[] Dices = { "4", "6", "8", "10", "12", "20", "100" };
+        private TwitchClient client = new();
+        private Random rnd = new();
+        private readonly string[] Dices = { "4", "6", "8", "10", "12", "20", "100" };
 
         private bool sendClose = false;
         private const int _maxElemTerminal = 200;
