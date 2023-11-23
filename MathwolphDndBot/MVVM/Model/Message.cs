@@ -36,12 +36,12 @@ namespace MathwolphDndBot.MVVM.Model
 
                     if (dDif < 2)
                     {
-                        if(Type == MessageType.AffDate)
-                        {
-                            return (dDif == 0 ? string.Empty : "Hier ") + Moment.ToString("h:mm tt");
-                        }
+                        //if(Type == MessageType.AffDate)
+                        //{
+                            return (dDif > 0 ? "Hier " : "Aujourd'hui ") + Moment.ToString("h:mm tt");
+                        //}
 
-                        return "Aujourd'hui " + Moment.ToString("h:mm tt");
+                        //return "Aujourd'hui " + Moment.ToString("h:mm tt");
                     }
 
                     return Moment.ToString("dddd h:mm tt");

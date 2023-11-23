@@ -40,7 +40,8 @@
 
             <TextBox Text="{Binding Token, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
                      extensions:Extensions.Label="Jeton D'accès"
-                     Style="{StaticResource FormControlInput}"/>
+                     Style="{StaticResource FormControlInput}"
+                     ToolTip="Le token peut s'obtenir à l'adresse : twitchtokengenerator.com"/>
             
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
