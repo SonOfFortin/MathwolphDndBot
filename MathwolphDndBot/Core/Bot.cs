@@ -13,12 +13,14 @@ using System.Collections.Generic;
 using System.Windows.Interop;
 using Microsoft.VisualBasic;
 using System.Windows;
+using TwitchLib.Communication.Interfaces;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace MathwolphDndBot.Core
 {
     internal class Bot : ObservableObject
     {
-        private ConnectionCredentials? creds;
         private TwitchClient client = new TwitchClient();
         private Random rnd = new Random();
         private string[] Dices = { "4", "6", "8", "10", "12", "20", "100" };
@@ -61,12 +63,7 @@ namespace MathwolphDndBot.Core
 
         internal void Connect()
         {
-            if (creds is null)
-            {
-                creds = new ConnectionCredentials(Settings.Default.ChannelName, Settings.Default.BotToken);
-            }
-
-            client.Initialize(creds, Settings.Default.ChannelName);
+            client.Initialize(new ConnectionCredentials(Settings.Default.ChannelName, Settings.Default.BotToken), Settings.Default.ChannelName);
 
             StrConnexionStatus = "Connecting...";
 
@@ -107,11 +104,14 @@ namespace MathwolphDndBot.Core
 
         private void Client_OnDisconnected(object? sender, OnDisconnectedEventArgs e)
         {
-            StrConnexionStatus = "Disconnected";
+            if (IsConnected)
+            {
+                AddTerminal("[Bot]: Disconnected.", TerminalType.Succes);
 
-            AddTerminal("[Bot]: Disconnected.", TerminalType.Succes);
+                StrConnexionStatus = "Disconnected";
 
-            IsConnected = false;
+                IsConnected = false;
+            }
         }
 
         private void Client_OnChatCommandReceived(object? sender, OnChatCommandReceivedArgs e)

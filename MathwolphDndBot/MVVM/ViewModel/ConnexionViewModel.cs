@@ -1,5 +1,7 @@
 ﻿using MathwolphDndBot.Core;
 using MathwolphDndBot.Properties;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MathwolphDndBot.MVVM.ViewModel
 {
@@ -50,7 +52,7 @@ namespace MathwolphDndBot.MVVM.ViewModel
 
                 Settings.Default.Save();
 
-                Global.ChgStateBots(); 
+                Global.ChgStateBots();
             });
         }
     }

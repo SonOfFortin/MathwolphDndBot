@@ -23,7 +23,7 @@
         </Setter>
 
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Global.Bots.IsConnected}" Value="True">
+            <DataTrigger Binding="{Binding Global.Bots.StrConnexionStatus}" Value="Connected">
                 <Setter Property="Content" Value="Déconnexion"/>
                 <Setter Property="IsEnabled" Value="True"/>
             </DataTrigger>
